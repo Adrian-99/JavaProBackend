@@ -10,5 +10,6 @@ import java.util.List;
 public class QuizQuestionDto {
     private Long id;
     private String question;
+    private boolean hasImage;
     private List<QuizAnswerDto> answers;
 }

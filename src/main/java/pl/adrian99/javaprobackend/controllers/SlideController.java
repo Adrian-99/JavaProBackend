@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import pl.adrian99.javaprobackend.dtos.SlideCategoryDto;
 import pl.adrian99.javaprobackend.dtos.SlideIdsDto;
+import pl.adrian99.javaprobackend.entities.Slide;
 import pl.adrian99.javaprobackend.mappers.SlideMapper;
 import pl.adrian99.javaprobackend.services.SlideService;
 
@@ -40,9 +41,9 @@ public class SlideController {
 
     @PostMapping("{categoryId}/{slideOrder}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addSlide(@PathVariable Long categoryId,
-                         @PathVariable Integer slideOrder,
-                         @RequestParam MultipartFile image) throws IOException {
-        slideService.addSlide(categoryId, slideOrder, image);
+    public Slide addSlide(@PathVariable Long categoryId,
+                          @PathVariable Integer slideOrder,
+                          @RequestParam MultipartFile image) throws IOException {
+        return slideService.addSlide(categoryId, slideOrder, image);
     }
 }

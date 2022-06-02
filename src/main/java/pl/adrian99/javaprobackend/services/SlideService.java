@@ -41,7 +41,7 @@ public class SlideService {
                 .orElseThrow(() -> new EntityNotFoundException("Slide with id " + slideId + " not found"));
     }
 
-    public void addSlide(Long categoryId, Integer slideOrder, MultipartFile image) throws IOException {
+    public Slide addSlide(Long categoryId, Integer slideOrder, MultipartFile image) throws IOException {
         var category = slideCategoryRepository.findById(categoryId);
         if (category.isPresent()) {
             var slide = new Slide();
@@ -49,6 +49,7 @@ public class SlideService {
             slide.setSlideOrder(slideOrder);
             slide.setCategory(category.get());
             slideRepository.saveAndFlush(slide);
+            return slide;
         } else {
             throw new EntityNotFoundException("Slide category with id " + categoryId + " not found");
         }

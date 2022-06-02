@@ -2,6 +2,7 @@ package pl.adrian99.javaprobackend.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,6 +19,11 @@ public class QuizQuestion {
 
     @Column
     private String question;
+
+    @Column(nullable = true)
+    @Lob
+    @Type(type = "org.hibernate.type.BinaryType")
+    private byte[] image;
 
     @ManyToOne
     @JoinColumn(name = "category_id")

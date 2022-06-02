@@ -2,13 +2,16 @@ package pl.adrian99.javaprobackend.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import pl.adrian99.javaprobackend.dtos.AnswersValidationDto;
 import pl.adrian99.javaprobackend.dtos.AnswersValidationResultDto;
 import pl.adrian99.javaprobackend.dtos.QuizCategoryDto;
 import pl.adrian99.javaprobackend.dtos.QuizQuestionDto;
+import pl.adrian99.javaprobackend.entities.QuizQuestion;
 import pl.adrian99.javaprobackend.mappers.QuizMapper;
 import pl.adrian99.javaprobackend.services.QuizService;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController()
@@ -31,10 +34,22 @@ public class QuizController {
         return quizMapper.fromQuizQuestionToDto(questions);
     }
 
+    @GetMapping("questions/image/{questionId}")
+    public byte[] getQuestionImage(@PathVariable Long questionId) {
+        return quizService.getQuestionImage(questionId);
+    }
+
     @PostMapping("answers/{questionId}/validate")
     public AnswersValidationResultDto validateAnswers(@PathVariable Long questionId, @RequestBody AnswersValidationDto answersValidationDto) {
         return new AnswersValidationResultDto(
                 quizService.validateAnswers(questionId, answersValidationDto.getCheckedAnswerIds())
         );
+    }
+
+    @PostMapping("questions/{categoryId}")
+    public QuizQuestion addQuestion(@PathVariable Long categoryId,
+                                    @RequestParam String question,
+                                    @RequestParam(required = false) MultipartFile image) throws IOException {
+        return quizService.addQuestion(categoryId, question, image);
     }
 }

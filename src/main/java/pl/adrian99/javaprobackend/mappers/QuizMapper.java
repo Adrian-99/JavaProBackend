@@ -26,7 +26,7 @@ public class QuizMapper {
     }
 
     public QuizQuestionDto fromQuizQuestionToDto(QuizQuestion question) {
-        return new QuizQuestionDto(question.getId(), question.getQuestion(), fromQuizAnswerToDto(question.getAnswers()));
+        return new QuizQuestionDto(question.getId(), question.getQuestion(), question.getImage() != null, fromQuizAnswerToDto(question.getAnswers()));
     }
 
     public List<QuizAnswerDto> fromQuizAnswerToDto(List<QuizAnswer> answers) {

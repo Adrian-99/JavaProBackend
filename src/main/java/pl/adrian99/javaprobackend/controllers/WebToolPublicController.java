@@ -11,9 +11,9 @@ import pl.adrian99.javaprobackend.services.WebToolService;
 import java.util.List;
 
 @RestController
-@RequestMapping("webtools")
+@RequestMapping("public/webtools")
 @RequiredArgsConstructor
-public class WebToolController {
+public class WebToolPublicController {
 
     private final WebToolService webToolService;
     private final WebToolMapper webToolMapper;

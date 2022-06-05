@@ -3,6 +3,7 @@ package pl.adrian99.javaprobackend.initializers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import pl.adrian99.javaprobackend.entities.Code;
 import pl.adrian99.javaprobackend.entities.CodeCategory;
@@ -12,6 +13,7 @@ import pl.adrian99.javaprobackend.repositories.CodeExampleRepository;
 import pl.adrian99.javaprobackend.repositories.CodeRepository;
 
 @Component
+@ConditionalOnProperty(name = "initializers.enabled", havingValue = "true")
 @RequiredArgsConstructor
 public class CodeInitializer implements ApplicationRunner {
 

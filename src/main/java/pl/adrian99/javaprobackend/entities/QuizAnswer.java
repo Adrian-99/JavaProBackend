@@ -1,7 +1,10 @@
 package pl.adrian99.javaprobackend.entities;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.adrian99.javaprobackend.utils.IEntity;
+import pl.adrian99.javaprobackend.utils.ParentEntityJsonSerializer;
 
 import javax.persistence.*;
 
@@ -9,7 +12,7 @@ import javax.persistence.*;
 @Table(name = "quiz_answers")
 @Data
 @NoArgsConstructor
-public class QuizAnswer {
+public class QuizAnswer implements IEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +24,7 @@ public class QuizAnswer {
     @Column
     private boolean isCorrect;
 
+    @JsonSerialize(using = ParentEntityJsonSerializer.class)
     @ManyToOne
     @JoinColumn(name = "question_id")
     private QuizQuestion question;

@@ -40,18 +40,4 @@ public class SlideService {
         return slideRepository.findById(slideId)
                 .orElseThrow(() -> new EntityNotFoundException("Slide with id " + slideId + " not found"));
     }
-
-    public Slide addSlide(Long categoryId, Integer slideOrder, MultipartFile image) throws IOException {
-        var category = slideCategoryRepository.findById(categoryId);
-        if (category.isPresent()) {
-            var slide = new Slide();
-            slide.setSlideData(image.getBytes());
-            slide.setSlideOrder(slideOrder);
-            slide.setCategory(category.get());
-            slideRepository.saveAndFlush(slide);
-            return slide;
-        } else {
-            throw new EntityNotFoundException("Slide category with id " + categoryId + " not found");
-        }
-    }
 }

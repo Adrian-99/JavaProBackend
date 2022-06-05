@@ -14,7 +14,7 @@ import pl.adrian99.javaprobackend.services.CodeService;
 import java.util.List;
 
 @RestController
-@RequestMapping("public/code")
+@RequestMapping("public/codes")
 @RequiredArgsConstructor
 public class CodePublicController {
 

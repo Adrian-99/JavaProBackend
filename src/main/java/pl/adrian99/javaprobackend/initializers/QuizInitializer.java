@@ -3,6 +3,7 @@ package pl.adrian99.javaprobackend.initializers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import pl.adrian99.javaprobackend.entities.QuizAnswer;
 import pl.adrian99.javaprobackend.entities.QuizCategory;
@@ -12,6 +13,7 @@ import pl.adrian99.javaprobackend.repositories.QuizCategoryRepository;
 import pl.adrian99.javaprobackend.repositories.QuizQuestionRepository;
 
 @Component
+@ConditionalOnProperty(name = "initializers.enabled", havingValue = "true")
 @RequiredArgsConstructor
 public class QuizInitializer implements ApplicationRunner {
 

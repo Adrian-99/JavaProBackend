@@ -1,7 +1,10 @@
 package pl.adrian99.javaprobackend.entities;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.adrian99.javaprobackend.utils.IEntity;
+import pl.adrian99.javaprobackend.utils.ParentEntityJsonSerializer;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,7 +13,7 @@ import java.util.List;
 @Table(name = "code_examples")
 @Data
 @NoArgsConstructor
-public class CodeExample {
+public class CodeExample implements IEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +28,7 @@ public class CodeExample {
     @Column
     private Integer exampleOrder;
 
+    @JsonSerialize(using = ParentEntityJsonSerializer.class)
     @ManyToOne
     @JoinColumn(name = "category_id")
     private CodeCategory category;

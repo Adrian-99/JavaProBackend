@@ -2,6 +2,7 @@ package pl.adrian99.javaprobackend.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.adrian99.javaprobackend.utils.IEntity;
 
 import javax.persistence.*;
 
@@ -9,7 +10,7 @@ import javax.persistence.*;
 @Table(name = "web_tools")
 @Data
 @NoArgsConstructor
-public class WebTool {
+public class WebTool implements IEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

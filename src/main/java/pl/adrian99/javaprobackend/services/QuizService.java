@@ -3,6 +3,7 @@ package pl.adrian99.javaprobackend.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import pl.adrian99.javaprobackend.dtos.admin.QuizCategoryInfoDto;
 import pl.adrian99.javaprobackend.entities.QuizAnswer;
 import pl.adrian99.javaprobackend.entities.QuizCategory;
 import pl.adrian99.javaprobackend.entities.QuizQuestion;
@@ -54,22 +55,6 @@ public class QuizService {
                     new HashSet<>(checkedAnswerIds).containsAll(correctAnswerIds);
         } else {
             throw new EntityNotFoundException("Question with id " + questionId + " not found");
-        }
-    }
-
-    public QuizQuestion addQuestion(Long categoryId, String question, MultipartFile image) throws IOException {
-        var category = quizCategoryRepository.findById(categoryId);
-        if (category.isPresent()) {
-            var quizQuestion = new QuizQuestion();
-            quizQuestion.setCategory(category.get());
-            quizQuestion.setQuestion(question);
-            if (image != null) {
-                quizQuestion.setImage(image.getBytes());
-            }
-            quizQuestionRepository.saveAndFlush(quizQuestion);
-            return quizQuestion;
-        } else {
-            throw new EntityNotFoundException("Category with id " + categoryId + " not found");
         }
     }
 }
